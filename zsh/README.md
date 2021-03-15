@@ -25,6 +25,8 @@ alias ll3="exa -l -a -T --level=3 ."
 ### Look more details into: 
 - [exa](https://github.com/ogham/exa)
 - [autojump](https://github.com/wting/autojump): a faster way to navigate your filesystem
+- [bat](https://github.com/sharkdp/bat): A cat(1) clone with syntax highlighting and Git integration.
+- [fzf](https://www.youtube.com/watch?v=tB-AgxzBmH8&t=717s): Youtube tutorial
 
 ### Issues
 - Where does iTerm2 store its settings?
