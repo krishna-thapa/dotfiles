@@ -69,6 +69,13 @@ eval $(thefuck --alias)
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh. #########
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# Add vscode
+code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
+
+# Add npm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
 # Example aliases
 # https://github.com/ogham/exa
 alias ll1="exa -l -a -T --level=1 ."
@@ -76,4 +83,10 @@ alias ll2="exa -l -a -T --level=2 ."
 alias ll3="exa -l -a -T --level=3 ."
 alias ll="exa -l -a"
 # fzf aliases
-alias search="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
+alias search="fzf --preview 'bat {-1} --color=always'"
+
+# git diff with fzf preview
+gitdiff() {
+  preview="git diff $@ --color=always -- {-1}"
+  git diff $@ --name-only | fzf -m --ansi --preview $preview
+}
