@@ -82,6 +82,8 @@ alias ll1="exa -l -a -T --level=1 ."
 alias ll2="exa -l -a -T --level=2 ."
 alias ll3="exa -l -a -T --level=3 ."
 alias ll="exa -l -a"
+alias l="exa --icons"
+alias la="exa --icons -a"
 # fzf aliases
 alias search="fzf --preview 'bat {-1} --color=always'"
 
