@@ -76,6 +76,9 @@ code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
+# change zsh-autosuggestions color
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=3"
+
 # Example aliases
 # https://github.com/ogham/exa
 alias ll1="exa -l -a -T --level=1 ."
