@@ -28,10 +28,12 @@ sudo apt-get install ./exa_0.9.0-4_amd64.deb
 
 ### Aliases
 ```
-alias ll="exa --long --header --git"
 alias ll1="exa -l -a -T --level=1 ."
 alias ll2="exa -l -a -T --level=2 ."
 alias ll3="exa -l -a -T --level=3 ."
+alias ll="exa -l -a --header --git"
+alias l="exa --icons"
+alias la="exa --icons -a"
 ```
 
 ## Install fzf
@@ -74,3 +76,16 @@ It is recommended that you place this command in your .bash_profile, .bashrc, .z
 ## Make terminator emulator appear and disappear like guake
 
 [Solution here](https://askubuntu.com/questions/174325/how-do-i-make-terminator-emulator-appear-and-disappear-like-guake)
+
+## Install custom fonts 
+- Download the [nerd fonts](https://www.nerdfonts.com/)
+- Unzip and copy to `~/.local/share/fonts`
+- Run the command `fc-cache -fv` to manually rebuild the font cache
+- Update the terminator fonts
+
+## Install [hstr](https://github.com/dvorka/hstr)
+```
+sudo add-apt-repository ppa:ultradvorka/ppa
+sudo apt-get update
+sudo apt-get install hstr
+```

@@ -69,10 +69,11 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git
+  #git
   zsh-autosuggestions
   vi-mode
   history-substring-search
+  safe-paste
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -100,6 +101,17 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 
+# HSTR configuration | 					  #################################
+alias hh=hstr                    # hh to be alias for hstr
+setopt histignorespace           # skip cmds w/ leading space from history
+export HSTR_CONFIG=hicolor       # get more colors
+bindkey -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode check doc)
+
+# https://github.com/zsh-users/zsh-history-substring-search
+# zsh-history-substring-search key bindings #############################
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
 # change zsh-autosuggestions color
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=23'
 
@@ -110,10 +122,17 @@ eval $(thefuck --alias)
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias c="clear"
-alias ll="exa --long --header --git"
+
+# https://github.com/ogham/exa
 alias ll1="exa -l -a -T --level=1 ."
 alias ll2="exa -l -a -T --level=2 ."
 alias ll3="exa -l -a -T --level=3 ."
+alias ll="exa -l -a --header --git"
+alias l="exa --icons"
+alias la="exa --icons -a"
+
+alias ll="exa --long --header --git"
+
 alias search="fzf --preview 'bat {-1} --color=always'"
 
 # git diff with fzf preview
