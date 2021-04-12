@@ -23,6 +23,7 @@ setopt histignorespace           # skip cmds w/ leading space from history
 export HSTR_CONFIG=hicolor       # get more colors
 bindkey -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode check doc)
 
+# https://github.com/zsh-users/zsh-history-substring-search
 # zsh-history-substring-search key bindings #############################
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
@@ -45,11 +46,13 @@ zplugin ice as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
 zplugin ice wait lucid atload'_zsh_autosuggest_start'
 zplugin light zsh-users/zsh-autosuggestions
 
+# Plugins from ohmyzsh: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins
 zplugin snippet OMZ::plugins/dotenv/dotenv.plugin.zsh
 zplugin snippet OMZ::plugins/fzf/fzf.plugin.zsh
-zplugin snippet OMZ::plugins/git/git.plugin.zsh
+#zplugin snippet OMZ::plugins/git/git.plugin.zsh
 zplugin snippet OMZ::plugins/safe-paste/safe-paste.plugin.zsh
 
+# https://github.com/romkatv/powerlevel10k
 zplugin ice depth=1; zplugin light romkatv/powerlevel10k
 
 # https://gist.github.com/ctechols/ca1035271ad134841284  ################
@@ -76,17 +79,28 @@ code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
+# change zsh-autosuggestions color
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=3"
+
 # Example aliases
 # https://github.com/ogham/exa
 alias ll1="exa -l -a -T --level=1 ."
 alias ll2="exa -l -a -T --level=2 ."
 alias ll3="exa -l -a -T --level=3 ."
 alias ll="exa -l -a"
+alias l="exa --icons"
+alias la="exa --icons -a"
 # fzf aliases
 alias search="fzf --preview 'bat {-1} --color=always'"
+alias c="clear"
 
 # git diff with fzf preview
 gitdiff() {
   preview="git diff $@ --color=always -- {-1}"
   git diff $@ --name-only | fzf -m --ansi --preview $preview
 }
+
+# tab compilation with arrow keys when pressed tab twice
+autoload -Uz compinit
+compinit
+zstyle ':completion:*' menu select
