@@ -9,7 +9,7 @@
 - Reboot the ubuntu server
 - Install: `sudo apt install net-tools`
 - Add the wireless network for the pi board: `sudo nano /etc/netplan/50-cloud-init.yaml`
-- **The indentation needs to be correct for the .yaml to work.** There shouldn't be any tabs only spaces.
+- **The indentation needs to be correct for the .yaml to work. Convert the 2 space into 4 spaces** There shouldn't be any tabs only spaces.
   ```
   wifis:
     wlan0:
@@ -17,7 +17,7 @@
       optional: true
       access-points:
         "your wifi name":
-        password: "your_wifi_password"
+          password: "your_wifi_password"
   ```
 - Save the file and apply it with: `sudo netplan apply` and `sudo reboot`
 - See the system in the pie board: `neofetch`

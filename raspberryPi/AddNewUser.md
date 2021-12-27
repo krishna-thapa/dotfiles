@@ -1,5 +1,6 @@
 ## SSH in to your server as the root user:
 
-- adduser pi
-- usermod -aG sudo pi
+- sudo adduser pi
+- sudo usermod -aG sudo pi
 - su - pi
+- groups
