@@ -69,10 +69,11 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git
+  #git
   zsh-autosuggestions
   vi-mode
   history-substring-search
+  safe-paste
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -100,8 +101,11 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 
-# change zsh-autosuggestions color
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=23'
+# HSTR configuration | 					  #################################
+alias hh=hstr                    # hh to be alias for hstr
+setopt histignorespace           # skip cmds w/ leading space from history
+export HSTR_CONFIG=hicolor       # get more colors
+bindkey -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode check doc)
 
 # The Fuck
 eval $(thefuck --alias)
@@ -110,10 +114,17 @@ eval $(thefuck --alias)
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias c="clear"
-alias ll="exa --long --header --git"
+
+# https://github.com/ogham/exa
 alias ll1="exa -l -a -T --level=1 ."
 alias ll2="exa -l -a -T --level=2 ."
 alias ll3="exa -l -a -T --level=3 ."
+alias ll="exa -l -a --header --git"
+alias l="exa --icons"
+alias la="exa --icons -a"
+
+alias ll="exa --long --header --git"
+
 alias search="fzf --preview 'bat {-1} --color=always'"
 
 # git diff with fzf preview
@@ -122,18 +133,74 @@ gitdiff() {
   git diff $@ --name-only | fzf -m --ansi --preview $preview
 }
 
+# change zsh-autosuggestions color
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=60'
+
+# https://github.com/zsh-users/zsh-history-substring-search
+# zsh-history-substring-search key bindings #############################
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
 # Terminal color dir
 eval `dircolors ~/.dir_colors/dircolors`
 
 # Remove hostname
 prompt_context() {} 
 
-# Source zsh-syntax-highlighting
-source /home/krishna/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# Add fzf in the source
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Add go in the path
 export PATH=$PATH:/usr/local/go/bin
 export PATH=~/.npm-global/bin:$PATH
 
-# Add fzf in the source
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# ----------------------------------------------------------------------
+function _web_search() {
+    emulate -L zsh
+
+    # define search engine URLS
+    typeset -A urls
+    urls[google]="https://www.google.com/search?q="
+    urls[duckduckgo]="https://www.duckduckgo.com/?q="
+
+    # check whether the search engine is supported
+    if [[ -z "${urls[$1]}" ]]; then
+        echo "Search engine $1 not supported."
+        return 1
+    fi
+
+    # search or go to main page depending on number of arguments passed
+    if [[ $# -gt 1 ]]; then
+        # build search url:
+        # join arguments passed with '+', then append to search engine URL
+        # shellcheck disable=SC2154
+        url="${urls[$1]}${(j:+:)@[2,-1]}"
+    else
+        # build main page url:
+        # split by '/', then rejoin protocol (1) and domain (2) parts with '//'
+        # shellcheck disable=SC2154
+        url="${(j://:)${(s:/:)urls[$1]}[1,2]}"
+    fi
+
+    open_command "$url"
+    return 0
+}
+
+function web_search() {
+    _web_search "$@"
+}
+
+alias google='web_search google'
+alias ddg='web_search duckduckgo'
+
+# bangs
+alias wiki='web_search duckduckgo \!w'
+alias news='web_search duckduckgo \!n'
+alias youtube='web_search duckduckgo \!yt'
+alias map='web_search duckduckgo \!m'
+alias image='web_search duckduckgo \!i'
+alias ducky='web_search duckduckgo \!'
+# ----------------------------------------------------------------------

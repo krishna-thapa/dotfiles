@@ -1,21 +1,66 @@
 ## Terminator
 
-### Install
+### Install Terminator
 ```
 sudo add-apt-repository ppa:gnome-terminator
 sudo apt-get update
 sudo apt-get install terminator
 ```
-### Color schema 
+
+## Installing Zsh in Ubuntu Linux
+```
+sudo apt install zsh
+zsh --version
+echo $SHELL
+```
+
+Set it as the default shell
+```
+chsh -s $(which zsh) 
+or 
+chsh -s /usr/bin/zsh
+```
+
+Revert to Old Bash Shell
+```
+$ sudo apt --purge remove zsh
+$ chsh -s $(which "SHELL NAME")
+```
+
+## Install OH-MY-ZSH in Ubuntu
+```
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
+Removing OH-MY-ZSH in Ubuntu Linux
+```
+uninstall oh_my_zsh
+```
+
+## Color schema 
 [Gruvbox dark](https://github.com/egel/terminator-gruvbox)
 
-### Shortcuts:
+## Shortcuts:
 ```
 close_term = Shift+Ctrl+Delete
 new_tab = Shift+Ctrl+Space
 split_horiz = Shift+Ctrl+Down
 split_vert = Shift+Ctrl+Right
+search = Ctril+F
 ```
+
+## Install zsh plugins
+```
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+```
+
+## Install [Powerlevel10k](https://github.com/romkatv/powerlevel10k)
+- Font use Meslo Nerd Font as Bold 13: https://github.com/romkatv/powerlevel10k#meslo-nerd-font-patched-for-powerlevel10k
+- https://github.com/romkatv/powerlevel10k
+- Restart Zsh.
+- Type p10k configure if the configuration wizard doesn't start automatically.
+
 
 ## Install exa
 
@@ -24,14 +69,6 @@ split_vert = Shift+Ctrl+Right
 ```
 wget http://archive.ubuntu.com/ubuntu/pool/universe/r/rust-exa/exa_0.9.0-4_amd64.deb
 sudo apt-get install ./exa_0.9.0-4_amd64.deb
-```
-
-### Aliases
-```
-alias ll="exa --long --header --git"
-alias ll1="exa -l -a -T --level=1 ."
-alias ll2="exa -l -a -T --level=2 ."
-alias ll3="exa -l -a -T --level=3 ."
 ```
 
 ## Install fzf
@@ -52,11 +89,6 @@ wget -q https://script.install.devinsideyou.com/bat
 sudo chmod +x bat && ./bat
 ```
 
-### Aliases
-```
-alias search="fzf --preview 'bat {-1} --color=always'"
-```
-
 ## Install The Fuck
 
 [Corrects errors in previous console commands.](https://github.com/nvbn/thefuck)
@@ -74,3 +106,16 @@ It is recommended that you place this command in your .bash_profile, .bashrc, .z
 ## Make terminator emulator appear and disappear like guake
 
 [Solution here](https://askubuntu.com/questions/174325/how-do-i-make-terminator-emulator-appear-and-disappear-like-guake)
+
+## Install custom fonts 
+- Download the [nerd fonts](https://www.nerdfonts.com/)
+- Unzip and copy to `~/.local/share/fonts`
+- Run the command `fc-cache -fv` to manually rebuild the font cache
+- Update the terminator fonts
+
+## Install [hstr](https://github.com/dvorka/hstr)
+```
+sudo add-apt-repository ppa:ultradvorka/ppa
+sudo apt-get update
+sudo apt-get install hstr
+```
