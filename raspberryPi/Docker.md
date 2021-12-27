@@ -5,6 +5,7 @@
   sudo usermod -aG docker ${USER}
   su - ${USER}
   groups
+  docker --version
   ```
 
 ## How To Install and Use Docker-compose
@@ -13,3 +14,6 @@
   sudo chmod +x /usr/local/bin/docker-compose
   docker-compose --version
   ``` 
+
+## How to install Git
+`sudo apt install git`
