@@ -26,9 +26,7 @@
 - To reboot: `sudo reboot`
 - Ping google to check the internet connection: `ping -c 6 google.com`
 - Find the IP address of the pi: `hostname -I`
-- Shutdown the pi board: `sudo shutdown -now`
-
-192.168.0.80
+- Shutdown the pi board: `sudo shutdown h -now`
 
 ## Issue with host
 - If you got the SSH remote host identification has changed issue while connecting to the Pi board with SSH then you have to removes all keys belonging to hostname from a known_hosts file. Error will looks like 
@@ -48,3 +46,16 @@
   Host key verification failed.
   ```
 - Solution is to run the command: `ssh-keygen -R [hostname]`
+
+## Alias to add in the bashrc file
+- Add these under the `.bashrc`
+  ```
+  # alias for the System functions
+  alias piReboot='sudo reboot'
+  alias piShutDown='sudo shutdown -h now'
+  alias c='clear'
+  alias piUpdate='sudo apt update; sudo apt upgrade'
+  alias piSystem='neofetch'
+  alias piIp='hostname -I'
+  ```
+- Run `source .bashrc`
