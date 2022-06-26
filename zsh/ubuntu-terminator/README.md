@@ -1,6 +1,6 @@
 ## Terminator
 
-### Install Terminator
+### Install Terminator or you can install from software store
 ```
 sudo add-apt-repository ppa:gnome-terminator
 sudo apt-get update
@@ -46,7 +46,7 @@ close_term = Shift+Ctrl+Delete
 new_tab = Shift+Ctrl+Space
 split_horiz = Shift+Ctrl+Down
 split_vert = Shift+Ctrl+Right
-search = Ctril+F
+search = Ctrl+F
 ```
 
 ## Install zsh plugins
@@ -54,6 +54,7 @@ search = Ctril+F
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 ```
+- Add in `~/.zshrc` plugin: `plugins=( [plugins...] zsh-syntax-highlighting)`
 
 ## Install [Powerlevel10k](https://github.com/romkatv/powerlevel10k)
 - Font use Meslo Nerd Font as Bold 13: https://github.com/romkatv/powerlevel10k#meslo-nerd-font-patched-for-powerlevel10k
@@ -67,8 +68,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/
 [A modern replacement for ls.](https://the.exa.website/)
 
 ```
-wget http://archive.ubuntu.com/ubuntu/pool/universe/r/rust-exa/exa_0.9.0-4_amd64.deb
-sudo apt-get install ./exa_0.9.0-4_amd64.deb
+cargo install exa
 ```
 
 ## Install fzf
@@ -107,7 +107,7 @@ It is recommended that you place this command in your .bash_profile, .bashrc, .z
 
 [Solution here](https://askubuntu.com/questions/174325/how-do-i-make-terminator-emulator-appear-and-disappear-like-guake)
 
-## Install custom fonts 
+## Install custom fonts or you can just click the install button 
 - Download the [nerd fonts](https://www.nerdfonts.com/)
 - Unzip and copy to `~/.local/share/fonts`
 - Run the command `fc-cache -fv` to manually rebuild the font cache

@@ -69,11 +69,25 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git
+  # Adds keyboard shortcuts for navigating directory history and hierarchy
+  dirhistory
+  # Copies the path of given directory or file to the system clipboard.
+  # Make sure you install: sudo apt install xclip xsel
+  copypath
+  # copies the text that is currently typed in the command line to the system clipboard.
+  copybuffer
+  # Suggests commands as you type based on history and completions.
   zsh-autosuggestions
   vi-mode
+  # Type in any part of any command from history and then press chosen keys
   history-substring-search
+  # Preventing any code from actually running while pasting
   safe-paste
+  # Easily prefix your current or previous commands with sudo by pressing esc twice
+  sudo
+  # Plugin adds aliases for searching with Google, Wiki, Bing, YouTube and other popular services
+  web-search
+  # Provides syntax highlighting for the shell zsh
   zsh-syntax-highlighting
 )
 
@@ -159,50 +173,5 @@ prompt_context() {}
 export PATH=$PATH:/usr/local/go/bin
 export PATH=~/.npm-global/bin:$PATH
 
-# ----------------------------------------------------------------------
-function _web_search() {
-    emulate -L zsh
-
-    # define search engine URLS
-    typeset -A urls
-    urls[google]="https://www.google.com/search?q="
-    urls[duckduckgo]="https://www.duckduckgo.com/?q="
-
-    # check whether the search engine is supported
-    if [[ -z "${urls[$1]}" ]]; then
-        echo "Search engine $1 not supported."
-        return 1
-    fi
-
-    # search or go to main page depending on number of arguments passed
-    if [[ $# -gt 1 ]]; then
-        # build search url:
-        # join arguments passed with '+', then append to search engine URL
-        # shellcheck disable=SC2154
-        url="${urls[$1]}${(j:+:)@[2,-1]}"
-    else
-        # build main page url:
-        # split by '/', then rejoin protocol (1) and domain (2) parts with '//'
-        # shellcheck disable=SC2154
-        url="${(j://:)${(s:/:)urls[$1]}[1,2]}"
-    fi
-
-    open_command "$url"
-    return 0
-}
-
-function web_search() {
-    _web_search "$@"
-}
-
-alias google='web_search google'
-alias ddg='web_search duckduckgo'
-
-# bangs
-alias wiki='web_search duckduckgo \!w'
-alias news='web_search duckduckgo \!n'
-alias youtube='web_search duckduckgo \!yt'
-alias map='web_search duckduckgo \!m'
-alias image='web_search duckduckgo \!i'
-alias ducky='web_search duckduckgo \!'
-# ----------------------------------------------------------------------
+# Ubuntu upgrade and update
+alias update="sudo apt-get update && sudo apt-get upgrade && sudo apt autoremove"
