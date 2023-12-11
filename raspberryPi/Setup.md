@@ -57,5 +57,7 @@
   alias piUpdate='sudo apt update; sudo apt upgrade'
   alias piSystem='neofetch'
   alias piIp='hostname -I'
+  alias dcu='docker-compose up'
+  alias dcd='docker-compose down'
   ```
 - Run `source .bashrc`
