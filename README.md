@@ -5,3 +5,5 @@ dotfiles including for vim and zsh for macos and ubuntu.
 
 ### Resources
 1. [awesome-dotfiles](https://github.com/webpro/awesome-dotfiles)
+
+test
